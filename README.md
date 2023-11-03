@@ -41,7 +41,7 @@ import processCode from "lab4-compiler";
 
 ![](https://github.com/taffarel55/lab4-compiler/raw/main/assets/web.png)
 
-[Link para a Demonstração Web](https://taffarel55.github/lab4-compiler)
+[Link para a Demonstração Web](https://taffarel55.github.io/lab4-compiler/)
 
 ## 🤝 Contribuindo
 
