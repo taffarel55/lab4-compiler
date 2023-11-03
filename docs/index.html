@@ -16,7 +16,7 @@
       }
 
       .container {
-        max-width: 600px;
+        width: 320px;
         padding: 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
@@ -26,15 +26,6 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-      }
-
-      .code {
-        height: 200px;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        resize: none;
       }
 
       button {
@@ -57,13 +48,47 @@
         font-family: monospace;
         white-space: pre-wrap;
       }
+
+      .editor {
+        display: flex;
+      }
+
+      .linhas {
+        font-family: monospace;
+        padding: 10px;
+        border-right: 1px solid #ccc;
+      }
+
+      .linhas p {
+        margin: 0;
+        height: 20px; /* Ajuste a altura da linha para corresponder à altura do texto no textarea */
+        line-height: 20px; /* Ajuste a altura da linha conforme necessário */
+      }
+
+      .code {
+        font-family: monospace;
+        font-size: 16px; /* Ajuste o tamanho da fonte conforme necessário */
+        line-height: 20px; /* Ajuste a altura da linha conforme necessário */
+        flex-grow: 1;
+        padding: 10px;
+        border: none;
+        resize: none;
+        height: auto;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>Assembler Web - LAB 4</h1>
       <form class="form">
-        <textarea class="code" placeholder="Insira o código aqui"></textarea>
+        <div class="editor">
+          <div class="linhas" id="linhas"></div>
+          <textarea
+            class="code"
+            id="codigo"
+            placeholder="Insira o código aqui"
+          ></textarea>
+        </div>
 
         <button type="submit">Assembler!</button>
         <button type="button" class="copy-button">Copiar Código</button>
@@ -78,12 +103,35 @@
       const code = document.querySelector(".code");
       const terminal = document.querySelector(".terminal");
 
+      function redirecionarConsoleParaDiv(elemento) {
+        const consoleOriginal = console;
+        console = Object.assign({}, consoleOriginal, {
+          log: function (mensagem) {
+            elemento.innerHTML += `<p>${mensagem}</p>`;
+            consoleOriginal.log.apply(consoleOriginal, arguments);
+          },
+          error: function (mensagem) {
+            elemento.innerHTML += `<p style="color:red;">${mensagem}</p>`;
+            consoleOriginal.error.apply(consoleOriginal, arguments);
+          },
+          warn: function (mensagem) {
+            elemento.innerHTML += `<p style="color:orange;">${mensagem}</p>`;
+            consoleOriginal.warn.apply(consoleOriginal, arguments);
+          },
+          info: function (mensagem) {
+            elemento.innerHTML += `<p style="color:blue;">${mensagem}</p>`;
+            consoleOriginal.info.apply(consoleOriginal, arguments);
+          },
+        });
+      }
+
+      redirecionarConsoleParaDiv(terminal);
+
       form.addEventListener("submit", (e) => {
         e.preventDefault();
+        terminal.textContent = "";
         const machineCode = processCode(code.value);
-        if (!machineCode) {
-          terminal.textContent = "Erro de compilação, verifique o console";
-        } else {
+        if (machineCode) {
           terminal.textContent = machineCode;
         }
       });
@@ -98,6 +146,22 @@
         document.execCommand("copy");
         window.getSelection().removeAllRanges();
       });
+
+      const linhasDiv = document.getElementById("linhas");
+      const codigoTextarea = document.getElementById("codigo");
+
+      codigoTextarea.addEventListener("input", atualizarLinhas);
+
+      function atualizarLinhas() {
+        const linhas = codigoTextarea.value.split("\n").length;
+        linhasDiv.innerHTML = "";
+        for (let i = 1; i <= linhas; i++) {
+          linhasDiv.innerHTML += `<p>${i}</p>`;
+        }
+      }
+
+      // Inicializa as linhas
+      atualizarLinhas();
     </script>
   </body>
 </html>
