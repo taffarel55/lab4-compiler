@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assembler Web</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        max-width: 600px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .code {
+        height: 200px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .terminal {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #000;
+        color: #00ff00;
+        font-family: monospace;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Assembler Web - LAB 4</h1>
+      <form class="form">
+        <textarea class="code" placeholder="Insira o código aqui"></textarea>
+
+        <button type="submit">Assembler!</button>
+        <button type="button" class="copy-button">Copiar Código</button>
+      </form>
+      <div class="terminal"></div>
+    </div>
+
+    <script type="module">
+      import processCode from "https://cdn.jsdelivr.net/npm/lab4-compiler@1.0.4/core.js";
+
+      const form = document.querySelector(".form");
+      const code = document.querySelector(".code");
+      const terminal = document.querySelector(".terminal");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const machineCode = processCode(code.value);
+        if (!machineCode) {
+          terminal.textContent = "Erro de compilação, verifique o console";
+        } else {
+          terminal.textContent = machineCode;
+        }
+      });
+
+      const copyButton = document.querySelector(".copy-button");
+
+      copyButton.addEventListener("click", () => {
+        const range = document.createRange();
+        range.selectNode(terminal);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();
+      });
+    </script>
+  </body>
+</html>

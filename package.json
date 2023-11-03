@@ -1,0 +1,27 @@
+{
+  "name": "lab4-compiler",
+  "type": "module",
+  "version": "1.0.5",
+  "description": "Compiler",
+  "main": "compiler.js",
+  "bin": {
+    "lab4-compiler": "compiler.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "assembly",
+    "compiler",
+    "terminal"
+  ],
+  "author": "Maurício Taffarel <contact@taffarel.tech>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/taffarel55/lab4-compiler/issues"
+  },
+  "homepage": "https://github.com/taffarel55/lab4-compiler#readme",
+  "dependencies": {
+    "minimist": "^1.2.8"
+  }
+}
