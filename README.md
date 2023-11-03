@@ -1,6 +1,6 @@
 # lab4-compiler
 
-[![npm version](https://badge.fury.io/js/lab4-compiler.svg)](https://www.npmjs.com/package/nome-do-pacote)
+[![npm version](https://badge.fury.io/js/lab4-compiler.svg)](https://www.npmjs.com/package/lab4-compiler)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Compilador para a disciplina LAB4 UFBA
