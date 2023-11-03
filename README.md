@@ -6,10 +6,10 @@
 Compilador para a disciplina LAB4 UFBA
 
 ## 🚀 Uso
+
 ```bash
 npx lab4-compiler example.asm
 ```
-
 
 ## 🛠️ Instalação
 
@@ -35,11 +35,11 @@ import processCode from "lab4-compiler";
 
 ## 📜 Instruction Set
 
-![](assets/set.png)
+![](https://github.com/taffarel55/lab4-compiler/raw/main/assets/set.png)
 
 ## 🌐 Demonstração Web
 
-![](assets/web.png)
+![](https://github.com/taffarel55/lab4-compiler/raw/main/assets/web.png)
 
 [Link para a Demonstração Web](https://taffarel55.github/lab4-compiler)
 
