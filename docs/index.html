@@ -130,7 +130,7 @@
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         terminal.textContent = "";
-        const machineCode = processCode(code.value);
+        const machineCode = processCode(code.value, "web", false);
         if (machineCode) {
           terminal.textContent = machineCode;
         }
